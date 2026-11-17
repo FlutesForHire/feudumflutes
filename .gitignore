@@ -15,6 +15,7 @@ package-lock.json
 yarn.lock
 
 # Claude
+CLAUDE.md
 .claude/
 INSTRUCTIONS.md
 # Art assets (pending publisher files)
