@@ -1,4 +1,5 @@
 <?php
+
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
@@ -14,15 +15,23 @@
  *
  * In this PHP file, you are going to defines the rules of the game.
  */
+
 declare(strict_types=1);
 
 namespace Bga\Games\FeudumFlutes;
 
 use Bga\Games\FeudumFlutes\States\PlayerTurn;
 use Bga\GameFramework\Components\Counters\PlayerCounter;
+use Override;
 
 class Game extends \Bga\GameFramework\Table
 {
+    private const COLOR_RED = 'b73624';
+    private const COLOR_GREEN = '707805';
+    private const COLOR_BLUE = '3156c0';
+    private const COLOR_YELLOW = 'fbe426';
+    private const COLOR_PURPLE = 'e063b6';
+
     public static array $CARD_TYPES;
 
     public PlayerCounter $playerEnergy;
@@ -97,21 +106,21 @@ class Game extends \Bga\GameFramework\Table
      */
     public function upgradeTableDb($from_version)
     {
-//       if ($from_version <= 1404301345)
-//       {
-//            // ! important ! Use `DBPREFIX_<table_name>` for all tables
-//
-//            $sql = "ALTER TABLE `DBPREFIX_xxxxxxx` ....";
-//            $this->applyDbUpgradeToAllDB( $sql );
-//       }
-//
-//       if ($from_version <= 1405061421)
-//       {
-//            // ! important ! Use `DBPREFIX_<table_name>` for all tables
-//
-//            $sql = "CREATE TABLE `DBPREFIX_xxxxxxx` ....";
-//            $this->applyDbUpgradeToAllDB( $sql );
-//       }
+        //       if ($from_version <= 1404301345)
+        //       {
+        //            // ! important ! Use `DBPREFIX_<table_name>` for all tables
+        //
+        //            $sql = "ALTER TABLE `DBPREFIX_xxxxxxx` ....";
+        //            $this->applyDbUpgradeToAllDB( $sql );
+        //       }
+        //
+        //       if ($from_version <= 1405061421)
+        //       {
+        //            // ! important ! Use `DBPREFIX_<table_name>` for all tables
+        //
+        //            $sql = "CREATE TABLE `DBPREFIX_xxxxxxx` ....";
+        //            $this->applyDbUpgradeToAllDB( $sql );
+        //       }
     }
 
     /*
@@ -194,11 +203,32 @@ class Game extends \Bga\GameFramework\Table
     }
 
     /**
+     * Maps BGA favorite colors to the game's player colors.
+     * Called from reattributeColorsBasedOnPreferences() in setupNewGame()
+     */
+    #[Override]
+    public function getSpecificColorPairings(): array
+    {
+        return [
+            'ff0000' /* Red */          => self::COLOR_RED,
+            'f07f16' /* Orange */       => self::COLOR_RED,
+            '008000' /* Green */        => self::COLOR_GREEN,
+            'bdd002' /* Khaki green */  => self::COLOR_GREEN,
+            '0000ff' /* Blue */         => self::COLOR_BLUE,
+            '72c3b1' /* Cyan */         => self::COLOR_BLUE,
+            'ffa500' /* Yellow */       => self::COLOR_YELLOW,
+            '982fff' /* Purple */       => self::COLOR_PURPLE,
+            'e94190' /* Pink */         => self::COLOR_PURPLE,
+        ];
+    }
+
+    /**
      * Example of debug function.
      * Here, jump to a state you want to test (by default, jump to next player state)
      * You can trigger it on Studio using the Debug button on the right of the top bar.
      */
-    public function debug_goToState(int $state = 3) {
+    public function debug_goToState(int $state = 3)
+    {
         $this->gamestate->jumpToState($state);
     }
 
