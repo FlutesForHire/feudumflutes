@@ -1,7 +1,7 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * FeudumFlutes implementation : © <Your name here> <Your email address here>
+ * FeudumFlutes implementation : © Amy Pearson flutegirl@mac.com
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -60,6 +60,13 @@
     }
 */
 
+.board {
+    width: 4096px;
+    height: 1560px;
+    background-image: url('img/board.jpg');
+    position: relative;
+    background-size: 100% 100%;
+}
 
 
 

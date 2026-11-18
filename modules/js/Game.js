@@ -20,6 +20,9 @@
 // const BgaAnimations = await globalThis.importEsmLib('bga-animations', '1.x');
 // /** @type {typeof globalThis.BgaCards} */
 // const BgaCards = await globalThis.importEsmLib('bga-cards', '1.x');
+/** @type {typeof globalThis.BgaZoom} */
+const BgaZoom = await globalThis.importEsmLib('bga-zoom', '1.x');
+const ZOOM_STORAGE_KEY = 'feudumflutes-zoom';
 
 /**
  * @typedef {Player & {
@@ -180,7 +183,19 @@ export class Game {
         });
         
         // TODO: Set up your game interface here, according to "gamedatas"
+        this.bga.gameArea.getElement().insertAdjacentHTML('beforeend', `
+            <div id="game-table">
+                <div class="board"></div>
+            </div>
+            `);
         
+        new BgaZoom.Manager({
+            element: document.getElementById('game-table'),
+            localStorageZoomKey: ZOOM_STORAGE_KEY,
+            zoomControls: { color: 'black' },
+            autoZoom: { expectedWidth: 4096, minZoomLevel: 0.25 },
+            });
+
 
         // Setup game notifications to handle (see "setupNotifications" method below)
         this.setupNotifications();
