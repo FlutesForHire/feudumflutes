@@ -60,6 +60,10 @@
     }
 */
 
+:root {
+    --pawn-size: 100px; /* display size; change this to resize all pawns */
+}
+
 .board {
     width: 4096px;
     height: 1560px;
@@ -68,5 +72,26 @@
     background-size: 100% 100%;
 }
 
+.pawn {
+    width: var(--pawn-size);
+    height: var(--pawn-size);
+    background-image: url('img/characterpawns.jpg');
+    background-size: calc(var(--pawn-size) * 6) calc(var(--pawn-size) * 6); /* the whole 6x6 sheet, scaled to match */
+}
 
+/* characterpawns.jpg: 6×6 grid.
+    Columns (x): blue, green, magenta, pewter, yellow, red
+    Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
+.pawn-blue { background-position-x: calc(var(--pawn-size) * 0); }
+.pawn-green { background-position-x: calc(var(--pawn-size) * -1); }
+.pawn-magenta { background-position-x: calc(var(--pawn-size) * -2); }
+.pawn-pewter { background-position-x: calc(var(--pawn-size) * -3); }
+.pawn-yellow { background-position-x: calc(var(--pawn-size) * -4); }
+.pawn-red { background-position-x: calc(var(--pawn-size) * -5); }
 
+.pawn-alchemist { background-position-y: calc(var(--pawn-size) * 0); }
+.pawn-farmgirl { background-position-y: calc(var(--pawn-size) * -1); }
+.pawn-knight { background-position-y: calc(var(--pawn-size) * -2); }
+.pawn-merchant { background-position-y: calc(var(--pawn-size) * -3); }
+.pawn-monk { background-position-y: calc(var(--pawn-size) * -4); }
+.pawn-queen { background-position-y: calc(var(--pawn-size) * -5); }

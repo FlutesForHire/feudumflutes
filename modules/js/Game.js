@@ -185,7 +185,8 @@ export class Game {
         // TODO: Set up your game interface here, according to "gamedatas"
         this.bga.gameArea.getElement().insertAdjacentHTML('beforeend', `
             <div id="game-table">
-                <div class="board"></div>
+                <div class="board">
+                </div>
             </div>
             `);
         

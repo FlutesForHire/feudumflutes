@@ -26,11 +26,12 @@ use Override;
 
 class Game extends \Bga\GameFramework\Table
 {
-    private const COLOR_RED = 'b73624';
-    private const COLOR_GREEN = '707805';
-    private const COLOR_BLUE = '3156c0';
-    private const COLOR_YELLOW = 'fbe426';
-    private const COLOR_PURPLE = 'e063b6';
+    private const COLOR_RED = 'a03f3d';
+    private const COLOR_GREEN = '636745';
+    private const COLOR_BLUE = '586195';
+    private const COLOR_YELLOW = 'c7b14b';
+    private const COLOR_MAGENTA = 'a25c90';
+    private const COLOR_PEWTER = '757164'; // sixth color (Windmills & Catapults). Also used for gray preference
 
     public static array $CARD_TYPES;
 
@@ -217,8 +218,9 @@ class Game extends \Bga\GameFramework\Table
             '0000ff' /* Blue */         => self::COLOR_BLUE,
             '72c3b1' /* Cyan */         => self::COLOR_BLUE,
             'ffa500' /* Yellow */       => self::COLOR_YELLOW,
-            '982fff' /* Purple */       => self::COLOR_PURPLE,
-            'e94190' /* Pink */         => self::COLOR_PURPLE,
+            '982fff' /* Purple */       => self::COLOR_MAGENTA,
+            'e94190' /* Pink */         => self::COLOR_MAGENTA,
+            '7b7b7b' /* Gray */         => self::COLOR_PEWTER,
         ];
     }
 
