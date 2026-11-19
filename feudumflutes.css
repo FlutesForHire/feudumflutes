@@ -62,6 +62,7 @@
 
 :root {
     --pawn-size: 100px; /* display size; change this to resize all pawns */
+    --progress-die-size: 225px; /* display size; */
 }
 
 .board {
@@ -80,8 +81,8 @@
 }
 
 /* characterpawns.jpg: 6×6 grid.
-    Columns (x): blue, green, magenta, pewter, yellow, red
-    Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
+Columns (x): blue, green, magenta, pewter, yellow, red
+Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
 .pawn-blue { background-position-x: calc(var(--pawn-size) * 0); }
 .pawn-green { background-position-x: calc(var(--pawn-size) * -1); }
 .pawn-magenta { background-position-x: calc(var(--pawn-size) * -2); }
@@ -95,3 +96,18 @@
 .pawn-merchant { background-position-y: calc(var(--pawn-size) * -3); }
 .pawn-monk { background-position-y: calc(var(--pawn-size) * -4); }
 .pawn-queen { background-position-y: calc(var(--pawn-size) * -5); }
+
+.progress-die {
+    width: var(--progress-die-size);
+    height: var(--progress-die-size);
+    background-image: url('img/progressdie.jpg');
+    background-size: var(--progress-die-size) calc(var(--progress-die-size) * 6);
+}
+/* progressdie.jpg: 1×6 grid (one column).
+   Rows (y): seas, islands, forest, desert, badlands, mountains */
+.progress-die-seas { background-position-y: calc(var(--progress-die-size) * 0); }
+.progress-die-island { background-position-y: calc(var(--progress-die-size) * -1); }
+.progress-die-forest { background-position-y: calc(var(--progress-die-size) * -2); }
+.progress-die-desert { background-position-y: calc(var(--progress-die-size) * -3); }
+.progress-die-badlands { background-position-y: calc(var(--progress-die-size) * -4); }
+.progress-die-mountain { background-position-y: calc(var(--progress-die-size) * -5); }
