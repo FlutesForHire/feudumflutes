@@ -65,12 +65,55 @@
     --progress-die-size: 225px; /* display size; */
 }
 
+.minimap {
+    width: 600px;
+    aspect-ratio: 4096 / 1560;
+    background-image: url('img/board.jpg');
+    background-size: 100% 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.minimap-area {
+    position: absolute;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.minimap-area:hover {
+    border-color: yellow;
+}
+
+.minimap-area-current {
+    background-color: rgba(255, 255, 0, 0.4);
+}
+
+.board-viewport {
+    width: 80%;
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
+    position: relative;
+    max-width: 1560px;
+    margin: 0 auto;
+}
+
 .board {
     width: 4096px;
     height: 1560px;
     background-image: url('img/board.jpg');
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-size: 100% 100%;
+    transform-origin: 0 0;
+    transition: transform 0.5s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .board {
+        transition: none;
+    }
 }
 
 .pawn {

@@ -20,9 +20,20 @@
 // const BgaAnimations = await globalThis.importEsmLib('bga-animations', '1.x');
 // /** @type {typeof globalThis.BgaCards} */
 // const BgaCards = await globalThis.importEsmLib('bga-cards', '1.x');
-/** @type {typeof globalThis.BgaZoom} */
-const BgaZoom = await globalThis.importEsmLib('bga-zoom', '1.x');
-const ZOOM_STORAGE_KEY = 'feudumflutes-zoom';
+
+const BOARD_WIDTH = 4096;
+const BOARD_HEIGHT = 1560;
+const BOARD_VIEWS = [
+    { id: 'left-guilds',      x: 0,    y: 0,   width: 745,   height: 1560,   rotation: 90 },
+    { id: 'right-guilds',     x: 3350, y: 0,   width: 745,   height: 1560,   rotation: -90 },
+    { id: 'map-top-left',     x: 745,  y: 0,   width: 1560,  height: 780,    rotation: 0 },
+    { id: 'map-top-right',    x: 1790, y: 0,   width: 1560,  height: 780,    rotation: 0 },
+    { id: 'map-bottom-left',  x: 745,  y: 780, width: 1560,  height: 780,    rotation: 0 },
+    { id: 'map-bottom-right', x: 1790, y: 780, width: 1560,  height: 780,    rotation: 0 },
+    { id: 'map-middle-left',  x: 745,  y: 390, width: 1560,  height: 780,    rotation: 0 },
+    { id: 'map-middle-right', x: 1790, y: 390, width: 1560,  height: 780,    rotation: 0 },
+];
+const DEFAULT_VIEW_ID = 'map-top-left';
 
 /**
  * @typedef {Player & {
@@ -161,6 +172,7 @@ export class Game {
         `);
         
         // Setting up player boards
+        /*
         Object.values(gamedatas.players).forEach(player => {
             // example of setting up players boards
             this.bga.playerPanels.getElement(Number(player.id)).insertAdjacentHTML('beforeend', `
@@ -181,22 +193,37 @@ export class Game {
                 </div>
             `);
         });
+        */
         
-        // TODO: Set up your game interface here, according to "gamedatas"
         this.bga.gameArea.getElement().insertAdjacentHTML('beforeend', `
             <div id="game-table">
-                <div class="board">
+                <div id="minimap" class="minimap"></div>
+                <div id="board-viewport" class="board-viewport">
+                    <div id="board" class="board"></div>
                 </div>
             </div>
             `);
-        
-        new BgaZoom.Manager({
-            element: document.getElementById('game-table'),
-            localStorageZoomKey: ZOOM_STORAGE_KEY,
-            zoomControls: { color: 'black' },
-            autoZoom: { expectedWidth: 4096, minZoomLevel: 0.25 },
-            });
 
+        const minimap = document.getElementById('minimap');
+
+        for (const view of BOARD_VIEWS) {
+            const area = document.createElement('div');
+            area.classList.add('minimap-area');
+            area.style.left = (view.x / BOARD_WIDTH * 100) + '%';
+            area.style.top = (view.y / BOARD_HEIGHT * 100) + '%';
+            area.style.width = (view.width / BOARD_WIDTH * 100) + '%';
+            area.style.height = (view.height / BOARD_HEIGHT * 100) + '%';
+            area.dataset.viewId = view.id;
+            area.addEventListener('click', () => this.showBoardView(view));
+            minimap.appendChild(area);
+        }
+
+        const defaultView = BOARD_VIEWS.find(view => view.id === DEFAULT_VIEW_ID);
+        this.showBoardView(defaultView);
+
+        const viewport = document.getElementById('board-viewport');
+        const resizeObserver = new ResizeObserver(() => this.showBoardView(this.currentView));
+        resizeObserver.observe(viewport);
 
         // Setup game notifications to handle (see "setupNotifications" method below)
         this.setupNotifications();
@@ -213,6 +240,42 @@ export class Game {
         script. Typically, functions that are used in multiple state classes or outside a state class.
     
     */
+
+    /**
+     * Moves and rotates the board behind the viewport so the given preset view fills it.
+     * Called when a minimap area is clicked.
+     */
+    showBoardView(view) {
+        this.currentView = view;
+        const board = document.getElementById('board');
+        const viewport = document.getElementById('board-viewport');
+        let shiftX = 0;
+        let shiftY = 0;
+        let widthOnScreen = view.width;
+        if (view.rotation === 90) {
+            shiftX = view.height;
+            widthOnScreen = view.height;
+        } else if (view.rotation === -90) {
+            shiftY = view.width;
+            widthOnScreen = view.height;
+        }
+
+        const scale = viewport.clientWidth / widthOnScreen;
+
+        // CSS applies these right to left: move the view's corner to (0,0), rotate, shift back into the window, then scale.
+        board.style.transform =
+            `scale(${scale}) translate(${shiftX}px, ${shiftY}px) rotate(${view.rotation}deg) translate(${-view.x}px, ${-view.y}px)`;
+        
+        const minimapAreas = document.querySelectorAll('.minimap-area');
+        for (const area of minimapAreas) {
+            if (area.dataset.viewId === view.id) {
+                area.classList.add('minimap-area-current');
+            } else {
+                area.classList.remove('minimap-area-current');
+            }
+        }
+
+    }
 
     
     ///////////////////////////////////////////////////
