@@ -63,12 +63,14 @@
 :root {
     --pawn-size: 100px; /* display size; change this to resize all pawns */
     --progress-die-size: 225px; /* display size; */
+    --action-card-height: 250px;
+    --action-card-width: calc(var(--action-card-height) * (2 / 3)); /* cards are at a 2:3 ratio */
 }
 
 .minimap {
     width: 600px;
     aspect-ratio: 4096 / 1560;
-    background-image: url('img/board.jpg');
+    background-image: url('img/board.webp');
     background-size: 100% 100%;
     position: relative;
     margin: 0 auto;
@@ -101,7 +103,7 @@
 .board {
     width: 4096px;
     height: 1560px;
-    background-image: url('img/board.jpg');
+    background-image: url('img/board.webp');
     position: absolute;
     top: 0;
     left: 0;
@@ -119,11 +121,11 @@
 .pawn {
     width: var(--pawn-size);
     height: var(--pawn-size);
-    background-image: url('img/characterpawns.jpg');
+    background-image: url('img/characterpawns.webp');
     background-size: calc(var(--pawn-size) * 6) calc(var(--pawn-size) * 6); /* the whole 6x6 sheet, scaled to match */
 }
 
-/* characterpawns.jpg: 6×6 grid.
+/* characterpawns.webp: 6×6 grid.
 Columns (x): blue, green, magenta, pewter, yellow, red
 Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
 .pawn-blue { background-position-x: calc(var(--pawn-size) * 0); }
@@ -143,10 +145,10 @@ Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
 .progress-die {
     width: var(--progress-die-size);
     height: var(--progress-die-size);
-    background-image: url('img/progressdie.jpg');
+    background-image: url('img/progressdie.webp');
     background-size: var(--progress-die-size) calc(var(--progress-die-size) * 6);
 }
-/* progressdie.jpg: 1×6 grid (one column).
+/* progressdie.webp: 1×6 grid (one column).
    Rows (y): seas, islands, forest, desert, badlands, mountains */
 .progress-die-seas { background-position-y: calc(var(--progress-die-size) * 0); }
 .progress-die-island { background-position-y: calc(var(--progress-die-size) * -1); }
@@ -154,3 +156,35 @@ Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
 .progress-die-desert { background-position-y: calc(var(--progress-die-size) * -3); }
 .progress-die-badlands { background-position-y: calc(var(--progress-die-size) * -4); }
 .progress-die-mountain { background-position-y: calc(var(--progress-die-size) * -5); }
+
+.action-card {
+    width: var(--action-card-width);
+    height: var(--action-card-height);
+    border-radius: calc(var(--action-card-width) * 0.06);
+    border-color: dimgrey;
+    border-width: 2px;
+    background-image: url('img/actioncards.webp');
+    background-size: calc(var(--action-card-width) * 12) calc(var(--action-card-height) * 6);
+}
+/* actioncards.webp: 12x6 grid.
+    Rows (y): blue, green, magenta, pewter, yellow, red
+    Columns (x): back, conquer, defend, explore, guild, harvest, migrate, influence, move, tax, improve, repeat */
+.action-card-blue { background-position-y: calc(var(--action-card-height) * 0); }
+.action-card-green { background-position-y: calc(var(--action-card-height) * -1); }
+.action-card-magenta { background-position-y: calc(var(--action-card-height) * -2); }
+.action-card-pewter { background-position-y: calc(var(--action-card-height) * -3); }
+.action-card-yellow { background-position-y: calc(var(--action-card-height) * -4); }
+.action-card-red { background-position-y: calc(var(--action-card-height) * -5); }
+
+.action-card-back { background-position-x: calc(var(--action-card-width) * 0); }
+.action-card-conquer { background-position-x: calc(var(--action-card-width) * -1); }
+.action-card-defend { background-position-x: calc(var(--action-card-width) * -2); }
+.action-card-explore { background-position-x: calc(var(--action-card-width) * -3); }
+.action-card-guild { background-position-x: calc(var(--action-card-width) * -4); }
+.action-card-harvest { background-position-x: calc(var(--action-card-width) * -5); }
+.action-card-migrate { background-position-x: calc(var(--action-card-width) * -6); }
+.action-card-influence { background-position-x: calc(var(--action-card-width) * -7); }
+.action-card-move { background-position-x: calc(var(--action-card-width) * -8); }
+.action-card-tax { background-position-x: calc(var(--action-card-width) * -9); }
+.action-card-improve { background-position-x: calc(var(--action-card-width) * -10); }
+.action-card-repeat { background-position-x: calc(var(--action-card-width) * -11); }

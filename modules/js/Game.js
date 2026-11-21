@@ -243,7 +243,7 @@ export class Game {
 
     /**
      * Moves and rotates the board behind the viewport so the given preset view fills it.
-     * Called when a minimap area is clicked.
+     * Called when a minimap area is clicked and when the page is loaded.
      */
     showBoardView(view) {
         this.currentView = view;
