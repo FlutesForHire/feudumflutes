@@ -65,6 +65,16 @@
     --progress-die-size: 225px; /* display size; */
     --action-card-height: 250px;
     --action-card-width: calc(var(--action-card-height) * (2 / 3)); /* cards are at a 2:3 ratio */
+    --player-disc-size: 40px;
+    --influence-marker-height: 30px;
+
+    /* Make sure to update colors in Game.php and gameinfos.jsonc if changed here. */
+    --player-color-red: #a03f3d;
+    --player-color-green: #636745;
+    --player-color-blue: #586195;
+    --player-color-yellow: #c7b14b;
+    --player-color-magenta: #a25c90;
+    --player-color-pewter: #757164; 
 }
 
 .minimap {
@@ -161,8 +171,7 @@ Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
     width: var(--action-card-width);
     height: var(--action-card-height);
     border-radius: calc(var(--action-card-width) * 0.06);
-    border-color: dimgrey;
-    border-width: 2px;
+    border: 2px solid dimgrey;
     background-image: url('img/actioncards.webp');
     background-size: calc(var(--action-card-width) * 12) calc(var(--action-card-height) * 6);
 }
@@ -188,3 +197,31 @@ Rows (y):    alchemist, farmgirl, knight, merchant, monk, queen */
 .action-card-tax { background-position-x: calc(var(--action-card-width) * -9); }
 .action-card-improve { background-position-x: calc(var(--action-card-width) * -10); }
 .action-card-repeat { background-position-x: calc(var(--action-card-width) * -11); }
+
+.influence-marker {
+    width: calc(var(--influence-marker-height) * 0.866); /* regular hexagon ratio */
+    height: var(--influence-marker-height);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.influence-marker-blue { background-color: var(--player-color-blue); }
+.influence-marker-green { background-color: var(--player-color-green); }
+.influence-marker-magenta { background-color: var(--player-color-magenta); }
+.influence-marker-pewter { background-color: var(--player-color-pewter); }
+.influence-marker-yellow { background-color: var(--player-color-yellow); }
+.influence-marker-red { background-color: var(--player-color-red); }
+
+.player-disc {
+    width: var(--player-disc-size);
+    height: var(--player-disc-size);
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 2px solid #3a2a1a;
+}
+
+.player-disc-blue { background-color: var(--player-color-blue); }
+.player-disc-green { background-color: var(--player-color-green); }
+.player-disc-magenta { background-color: var(--player-color-magenta); }
+.player-disc-pewter { background-color: var(--player-color-pewter); }
+.player-disc-yellow { background-color: var(--player-color-yellow); }
+.player-disc-red { background-color: var(--player-color-red); }

@@ -26,6 +26,7 @@ use Override;
 
 class Game extends \Bga\GameFramework\Table
 {
+    /* Make sure to update colors in feudumflutes.css and gameinfos.jsonc if changed here. */
     private const COLOR_RED = 'a03f3d';
     private const COLOR_GREEN = '636745';
     private const COLOR_BLUE = '586195';
